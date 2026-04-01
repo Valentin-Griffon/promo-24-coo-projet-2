@@ -1,5 +1,7 @@
 package duckcorp.duck;
 
+import java.util.Objects;
+
 /**
  * Classe abstraite représentant un canard en plastique.
  *
@@ -9,7 +11,7 @@ package duckcorp.duck;
  *   - Implémentez les méthodes abstraites dans les sous-classes
  * @author Roussille Philippe <roussille@3il.fr>
  */
-public abstract class Duck {
+public abstract class Duck implements Qualifiable {
 
     private static int counter = 0;
 
@@ -28,7 +30,22 @@ public abstract class Duck {
 
     public String   getId()          { return id; }
     public DuckType getType()        { return type; }
-    public int      getQualityScore(){ return qualityScore; }   // satisfera Qualifiable
+
+    @Override
+    public int getQualityScore(){ return qualityScore; }   // satisfera Qualifiable
+
+    @Override
+    public boolean isDefective() {
+        return qualityScore < 20;
+    }
+
+    @Override
+    public String getQualityLabel() {
+        if (qualityScore >= 80) return "Excellent";
+        else if (qualityScore >= 50) return "Bon";
+        else if(qualityScore >= 20) return "Médiocre";
+        else return "Défectueux";
+    }
 
     // --- Méthodes abstraites à implémenter dans les sous-classes ---
 
@@ -37,20 +54,18 @@ public abstract class Duck {
 
     // --- TODO : equals et hashCode ---
 
-    /**
-     * Deux canards sont égaux si et seulement si ils ont le même identifiant.
-     * TODO : implémentez equals() en vous basant uniquement sur le champ id.
-     */
-    @Override
-    public boolean equals(Object o) {
-        throw new UnsupportedOperationException("TODO : Duck.equals()");
-    }
 
-    /** TODO : implémentez hashCode() de façon cohérente avec equals(). */
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("TODO : Duck.hashCode()");
+        return id.hashCode();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Duck)) return false;
+        return ((Duck) obj).id.equals(this.id);
+    }
+
 
     // --- toString fourni ---
 
