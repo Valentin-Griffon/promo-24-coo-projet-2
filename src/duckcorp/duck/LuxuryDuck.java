@@ -18,7 +18,7 @@ public class LuxuryDuck extends Duck {
      *
      * @param qualityScore
      */
-    protected LuxuryDuck(int qualityScore) {
+    public LuxuryDuck(int qualityScore) {
         super(DuckType.LUXURY, qualityScore);
     }
 

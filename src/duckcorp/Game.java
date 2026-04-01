@@ -2,7 +2,10 @@ package duckcorp;
 
 import duckcorp.duck.Duck;
 import duckcorp.factory.Factory;
+import duckcorp.machine.LuxuryMold;
 import duckcorp.machine.Machine;
+import duckcorp.machine.MiniPress;
+import duckcorp.machine.StandardPress;
 import duckcorp.order.Order;
 import duckcorp.order.OrderStatus;
 
@@ -121,6 +124,11 @@ public class Game {
      *   1 -> StandardPress  /  2 -> MiniPress  /  3 -> LuxuryMold
      */
     private Machine createMachine(int choice) {
-        throw new UnsupportedOperationException("TODO : Game.createMachine()");
+        return switch (choice) {
+            case 1 -> new StandardPress();
+            case 2 -> new MiniPress();
+            case 3 -> new LuxuryMold();
+            default -> throw new UnsupportedOperationException("Choix : 1,2 ou 3");
+        };
     }
 }

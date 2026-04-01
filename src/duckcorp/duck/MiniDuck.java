@@ -18,7 +18,7 @@ public class MiniDuck extends Duck {
      *
      * @param qualityScore
      */
-    protected MiniDuck(int qualityScore) {
+    public MiniDuck(int qualityScore) {
         super(DuckType.MINI, qualityScore);
     }
 
